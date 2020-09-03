@@ -2,10 +2,11 @@
 
 import React from 'react';
 import './product.css'
+import { Link } from 'react-router-dom';
 
 const Product = (props) => {
     console.log(props);
-    const {img, name, seller, price, stock} = props.product;   // for not repeating props.product every time
+    const {img, name, seller, price, stock, key} = props.product;   // for not repeating props.product every time
 
     return (
         <div className="product">
@@ -13,14 +14,14 @@ const Product = (props) => {
                 <img src={img} alt="" srcset=""/>
             </div>
             <div className="product-description">
-                <h4 className="product-name">{name}</h4>
+                <h4 className="product-name"><Link to={"/product/"+key}>{name}</Link></h4>
                 <p><small>By: {seller}</small></p>
                 <p>Price: ${price}</p>
                 <p><small>Only {stock} left in stock</small></p>
 
-                <button className="main-btn" onClick={() => props.clickAddProduct(props.product)}>
+                {props.showAddToCart && <button className="main-btn" onClick={() => props.clickAddProduct(props.product)}>
                     Add to Cart
-                </button>
+                </button>}  {/* shortcut of if condition */}
             </div>
         </div> 
     );
